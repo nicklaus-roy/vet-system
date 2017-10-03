@@ -20,7 +20,7 @@
 </head>
 <header>
     <?php 
-        include($root.'/admin/layouts/side-nav.php');
+        // include($root.'/admin/layouts/side-nav.php');
         include($root.'/admin/layouts/nav-bar.php');
     ?>
 </header>
