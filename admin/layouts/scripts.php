@@ -9,6 +9,8 @@
         }
         $('select').material_select();
         $(".button-collapse").sideNav();
-        $('.dropdown-button').dropdown();
+        $('.dropdown-button').dropdown({
+            constrainWidth: false
+        });
     });
 </script>

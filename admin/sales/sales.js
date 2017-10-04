@@ -13,6 +13,10 @@ var app_sales = new Vue({
         total_sales: 0.00,
         amount_given: 0.00,
         change: 0.00,
+        payment_method: '',
+        bank: "",
+        check_number: "",
+        client_id: ""
     },
     methods:{
         addToOrderList(){
@@ -50,6 +54,7 @@ var app_sales = new Vue({
             var pet = this.pets.find(element => {
                 return element.id == $('#pet_id').val();
             });
+            this.client_id = $('#client_id').val();
             vm.availed_services.push({
                 client_id: $('#client_id').val(),
                 service_id: service.id,
@@ -63,6 +68,28 @@ var app_sales = new Vue({
         },
         removeServices(availed_service){
             this.availed_services.splice(this.availed_services.indexOf(availed_service),1);
+        },
+        submitSales(){
+            $.ajax({
+                url: '/admin/sales/store.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    client_id: this.client_id,
+                    total_sales: this.total_sales,
+                    amount_given: this.amount_given,
+                    change: this.change,
+                    payment_method: this.payment_method,
+                    bank: this.bank,
+                    check_number: this.check_number,
+                    orders: this.orders,
+                    availed_services: this.availed_services
+                },
+                success:function(result){
+                    console.log("s");
+                    window.location.replace("/admin/sales/print-receipt.php?receipt_number="+result);
+                }
+            });
         }
     },
     computed:{
@@ -81,7 +108,10 @@ var app_sales = new Vue({
             return amount;
         },
         canPrint(){
-            return this.totalSales > 0 && this.amount_given > 0 && this.amount_given >= this.totalSales;
+            if(this.payment_method == 'cash'){
+                return this.totalSales > 0 && this.amount_given > 0 && this.amount_given >= this.totalSales;
+            }
+            return this.totalSales > 0 && this.check_number != "" && this.bank != "";
         },
         getChange(){
             var change =  this.amount_given-this.totalSales;
@@ -92,7 +122,7 @@ var app_sales = new Vue({
             return 0.0;
         }
     },
-    mounted(){
+    created(){
         var vm = this;
         $.ajax({
             url: '/admin/sales/get-products.php',
@@ -118,6 +148,9 @@ var app_sales = new Vue({
                 vm.clients = data;
             }
         });
+    },
+    mounted(){
+        var vm = this;
         $('#service_id').on('change', {vm:vm}, function(){
             var id = $(this).val();
             var service = vm.services.find(element => {

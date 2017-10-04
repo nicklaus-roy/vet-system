@@ -4,11 +4,8 @@
     include($root.'/shared/db_connect.php');
     $date = date("Y-m-d", strtotime($_GET['reservation_date']));
 
-    $reservations_query = $conn->query("SELECT r.id, r.service_name, r.client_name, rts.time_slot, r.reservation_date FROM
-        (SELECT r.id, r.time_slot, r.reservation_date, s.name as service_name, concat(c.last_name, ', ',c.first_name) as client_name
-         FROM animal_haven.reservations r INNER JOIN services s ON s.id = r.service_id 
-         INNER JOIN clients c ON r.client_id = c.id WHERE reservation_date = '$date') r
-        RIGHT JOIN reservation_time_slots rts ON rts.time_slot = r.time_slot");
+    $reservations_query = $conn->query("SELECT r.id, time_format(r.time_from, '%r') time_from, time_format(r.time_to, '%r') time_to, r.reservation_date, s.name as service_name, concat(c.last_name, ', ',c.first_name) as client_name FROM animal_haven.reservations r INNER JOIN services s ON s.id = r.service_id 
+         INNER JOIN clients c ON r.client_id = c.id WHERE reservation_date = '$date' ORDER BY r.time_from");
 
     $reservations = array();
     while($reservation = $reservations_query->fetch_assoc()){

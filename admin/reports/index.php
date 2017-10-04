@@ -1,14 +1,11 @@
 <?php
     include('../layouts/master.php');
-    $clients = $conn->query("SELECT * FROM clients");
-    $services = $conn->query("SELECT * FROM services");
-
 ?>
 <div class="row" id = "app-reservations">
     <div class="col s12">
         <div class="section">
             <h5>
-                Reservations
+                Reports
             </h5>
         </div>
         <div class="divider"></div>

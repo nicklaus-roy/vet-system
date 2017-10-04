@@ -24,7 +24,7 @@
                 <div class="col s12" style="margin-bottom: 20px">
                   <ul class="tabs">
                     <li class="tab col s3"><a href="#product-sales" class="active">Product Sales</a></li>
-                    <li class="tab col s3" :class = "{ disabled: !hasPets}"><a href="#services">Services</a></li>
+                    <li class="tab col s3" :class = "{ disabled: !hasPets}"><a href="#services">Availed Services</a></li>
                     <li class="tab col s3"><a href="#payment-details">Payment Details</a></li>
                   </ul>
                 </div>

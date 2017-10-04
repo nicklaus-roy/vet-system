@@ -6,9 +6,12 @@
     $reservation_date = date("Y-m-d", strtotime($_POST['reservation_date']));
     $client_id = $_POST['client_id'];
     $service_id = $_POST['service_id'];
-    $time_slot = $_POST['time_slot'];
+    $time_from = date("H:i:s", strtotime($_POST['time_from']));
+    $time_to = date("H:i:s", strtotime($_POST['time_to']));
+    var_dump($_POST['time_from']);
+    var_dump(strtotime($_POST['time_from']));
 
-    $reservations_query = $conn->query("INSERT INTO reservations (client_id, service_id, time_slot, reservation_date) 
-        VALUES('$client_id', '$service_id', '$time_slot', '$reservation_date')");
+    $reservations_query = $conn->query("INSERT INTO reservations (client_id, service_id, time_from, time_to, reservation_date) 
+        VALUES('$client_id', '$service_id', '$time_from', '$time_to', '$reservation_date')");
     exit;
 ?>

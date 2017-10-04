@@ -12,8 +12,19 @@
                 <li class=""><a href="/admin/inventory/index.php" class="black-text">
                     <i class="material-icons" style="font-size: 30px">layers</i>
                 </a></li>
-                <li class="<?=$_SESSION['delivery']?>"><a href="/admin/delivery/index.php" class="black-text">
-                    <i class="material-icons" style="font-size: 30px">local_shipping</i>
+                <li class="">
+                    <a class='dropdown-button black-text' 
+                        data-beloworigin="true"
+                        href='#' data-activates='dropdown2'>
+                        <i class="material-icons" style="font-size: 31px">insert_chart</i>
+                    </a>
+                    <ul id='dropdown2' class='dropdown-content'>
+                        <li><a href="/admin/reports/sales-report.php">Sales Report</a></li>
+                        <li><a href="/admin/reports/best-sellers-report.php">Best Sellers and Most Availed Report</a></li>
+                    </ul>
+                </li>
+                <li class=""><a href="/admin/sales/list-sales.php" class="black-text">
+                    <i class="material-icons" style="font-size: 30px">monetization_on</i>
                 </a></li>
                 <li class="">
                     <a class='dropdown-button black-text' 
@@ -22,7 +33,7 @@
                         <i class="material-icons" style="font-size: 31px">account_circle</i>
                     </a>
                     <ul id='dropdown1' class='dropdown-content'>
-                        <li><a href="/logout.php">logout</a></li>
+                        <li><a href="/logout.php">Logout</a></li>
                       </ul>
                 </li>
 
