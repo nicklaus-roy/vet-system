@@ -4,6 +4,11 @@
     $receipt_number = $_GET['receipt_number'];
     // $receipt_number = 8;
     $receipt_details = $conn->query("SELECT * FROM official_receipts WHERE receipt_number = '$receipt_number'")->fetch_assoc();
+    $sales = $conn->query("SELECT s.amount, s.original_amount, p.name FROM sales s INNER JOIN products p ON p.id = s.product_id 
+        WHERE s.receipt_number = '$receipt_number'");
+    $services_rendered = $conn->query("SELECT se.actual_price, se.price, s.name FROM services_rendered se 
+        INNER JOIN services s ON s.id = se.service_id
+        WHERE se.receipt_number = '$receipt_number'");
 ?>
 <html>
     <head>
@@ -17,7 +22,7 @@
         #row1{
             display:flex;
             flex-direction:row;
-        justify-content: space-around;
+            justify-content: space-around;
         }
 
         #column1{
@@ -69,32 +74,32 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Invoice No.</td>
+                            <td>Particulars.</td>
                             <td>Amount</td>
                         </tr>
+                        <?php while($sale = $sales->fetch_assoc()){?>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><?=$sale['name']?></td>
+                            <td><?=$sale['original_amount']?></td>
                         </tr>
+                        <?php }?>
+                        <?php while($service_rendered = $services_rendered->fetch_assoc()){?>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><?=$service_rendered['name']?></td>
+                            <td><?=$service_rendered['price']?></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        <?php }?>
                         <tr>
                             <td>Total</td>
                             <td><?=$receipt_details['total_sales']?></td>
                         </tr>
                         <tr>
                             <td>Less: SC/PWD Discount</td>
-                            <td></td>
+                            <td><?=$receipt_details['discount']?></td>
                         </tr>
                         <tr>
                             <td>Total Due</td>
-                            <td><?=$receipt_details['total_sales']?></td>
+                            <td><?=$receipt_details['amount_due']?></td>
                         </tr>
                         <tr>
                             <td>Less:Withholding Tax</td>

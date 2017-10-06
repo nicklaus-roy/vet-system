@@ -11,6 +11,11 @@
     $pets = $conn->query("SELECT * FROM pets WHERE client_id = '".$user['id']."'");
 
 ?>
+<style>
+    .picker__list{
+        width: 100%;
+    }
+</style>
 <div class="row" id = "app-reservations">
     <div class="col s12">
         <div class="section">
@@ -19,7 +24,7 @@
             </h5>
             <p>
                 <strong>Note:</strong> Home services and surgery can only be reserved through contacting the clinic directly.
-                <a href = "#" class="btn blue">Contact Us</a>
+                <a href = "/client/messages/create.php" class="btn blue"><i class="material-icons left">mail</i>Contact Us</a>
             </p>
 
         </div>
@@ -89,15 +94,16 @@
                 <div class="modal-content">
                     <h5>Add Reservation</h5>
                     <p><strong>Note:</strong> Home services and surgery can only be reserved through contacting the clinic directly.</p>
-                    <form action="/admin/reservations/store.php" method = "POST">
+                    <form action="/client/reservations/store.php" method = "POST">
                         <div class="row">
                             <div class="input-field col s3">
-                                <input type="text" name = "reservation_date" id = "reservation_date" v-model = "reservation_date" readonly>
+                                <input type="text" name = "reservation_date" id = "reservation_date" v-model = "reservation_date" 
+                                placeholder = "Date" readonly>
                                 <label for="reservation_date">Date:</label>
                             </div>
                             <div class="col s6">
                                 <label for="service">Service:</label>
-                                <select name = "service_id" id = "service_id" class="browser-default" v-model = "service_id">
+                                <select name = "service_id" id = "service_id" class="browser-default" v-model = "service_id" @change = "changeTimes()">
                                     <?php while($service = $services->fetch_assoc()){ ?>
                                         <option value="<?=$service['id']?>"><?=$service['name']?>(<?=sprintf("%d:", floor($service['duration_in_min']/60))."hrs. ".sprintf("%02d",$service['duration_in_min']%60);?>min)
                                         </option>
@@ -117,7 +123,8 @@
                                 <label for="client">Client:</label>
                             </div>                      
                             <div class="input-field col s4">
-                                <select name = "pet" id = "pet" v-model = "pet_id">
+                                <select name = "pet" id = "pet_id" v-model = "pet_id">
+                                    <option selected disabled>Choose a pet</option>
                                     <?php while($pet = $pets->fetch_assoc()){ ?>
                                         <option value="<?=$pet['id']?>"><?=$pet['name']?></option>
                                     <?php } ?>
@@ -151,6 +158,8 @@
 <?php
     include('../layouts/scripts.php');
 ?>
+<script src="/js/picker.js"></script>
+<script src="/js/picker.time.js"></script>
 <script src = "./reservations.js">
     
 </script>

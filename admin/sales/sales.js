@@ -16,7 +16,10 @@ var app_sales = new Vue({
         payment_method: '',
         bank: "",
         check_number: "",
-        client_id: ""
+        client_id: "",
+        discount_percent: 0.00,
+        discount: 0.00,
+        remarks: ''
     },
     methods:{
         addToOrderList(){
@@ -70,6 +73,7 @@ var app_sales = new Vue({
             this.availed_services.splice(this.availed_services.indexOf(availed_service),1);
         },
         submitSales(){
+            this.client_id = $('#client_id').val();
             $.ajax({
                 url: '/admin/sales/store.php',
                 type: 'POST',
@@ -77,13 +81,16 @@ var app_sales = new Vue({
                 data: {
                     client_id: this.client_id,
                     total_sales: this.total_sales,
+                    remarks: this.remarks,
                     amount_given: this.amount_given,
                     change: this.change,
                     payment_method: this.payment_method,
                     bank: this.bank,
                     check_number: this.check_number,
                     orders: this.orders,
-                    availed_services: this.availed_services
+                    availed_services: this.availed_services,
+                    discount: this.discount_percent,
+                    amount_due: this.discount
                 },
                 success:function(result){
                     console.log("s");
@@ -93,6 +100,10 @@ var app_sales = new Vue({
         }
     },
     computed:{
+        getAmountDue(){
+            this.discount = this.totalSales - this.totalSales*(this.discount_percent/100);
+            return this.discount;
+        },
         hasPets(){
             return this.pets != null && this.pets.length > 0;
         },
@@ -109,15 +120,15 @@ var app_sales = new Vue({
         },
         canPrint(){
             if(this.payment_method == 'cash'){
-                return this.totalSales > 0 && this.amount_given > 0 && this.amount_given >= this.totalSales;
+                return this.getAmountDue > 0 && this.amount_given > 0 && this.amount_given >= this.getAmountDue;
             }
-            return this.totalSales > 0 && this.check_number != "" && this.bank != "";
+            return this.getAmountDue > 0 && this.check_number != "" && this.bank != "";
         },
         getChange(){
-            var change =  this.amount_given-this.totalSales;
-            if(change > 0 && this.totalSales > 0){
+            var change =  this.amount_given-this.getAmountDue;
+            if(change > 0 && this.getAmountDue > 0){
                 this.change = change;
-                return this.amount_given-this.totalSales;
+                return this.amount_given-this.getAmountDue;
             }
             return 0.0;
         }

@@ -17,12 +17,24 @@
         <input type="number" name = "amount_given" id = "amount_given" v-model = "amount_given">
         <label for="amount_given">Amount Given:</label>
     </div>
+    <div class="input-field col s3" >
+        <input type="number" name = "discount_percent" id = "discount_percent" v-model.number = "discount_percent">
+        <label for="discount_percent">Discount Percent</label>
+    </div>
+    <div class="input-field col s3" >
+        <input type="number" name = "amount_due" id = "amount_due" readonly :value = "getAmountDue">
+        <label for="amount_due">Amount Due:</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s3">
+        <input type="text" name = "remarks" id = "remarks" v-model = "remarks">
+        <label for="remarks">Remarks:</label>
+    </div>
     <div class="input-field col s3">
         <input type="text" name = "change" id = "change" readonly :value = "getChange">
         <label for="change">Change:</label>
     </div>
-</div>
-<div class="row">
     <div class="input-field col s3" v-show = "payment_method == 'check'">
         <input type="number" name = "check_number" id = "check_number" v-model = "check_number">
         <label for="check_number">Check No.:</label>
@@ -31,6 +43,8 @@
         <input type="text" name = "bank" id = "bank" v-model = "bank">
         <label for="bank">Bank: </label>
     </div>
+</div>
+<div class="row">
     <div class="input-field col-s3">
         <button class="btn" :class = "{disabled: !canPrint}" @click = "submitSales()">
             <i class="material-icons left">print</i>

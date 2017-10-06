@@ -12,6 +12,11 @@
         die(mysqli_error($conn));
     }
 ?>
+<style>
+    .critical-level{
+        background-color: rgba(255,0,0,0.5)!important;
+    }
+</style>
 <div class="row">
     <div class="col s12">
         <div class="section">
@@ -36,7 +41,7 @@
                 </thead>
                 <tbody>
                     <?php while($product = $products->fetch_assoc()){ ?>
-                        <tr>
+                        <tr class = "<?php echo $product['quantity'] <= $product['reorder_quantity'] ? "critical-level":""?>">
                             <td><?=$product['name']?></td>
                             <td><?=$product['description']?></td>
                             <td><?=$product['price']?></td>

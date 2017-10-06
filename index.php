@@ -21,10 +21,10 @@
             <div class = "parallax-container">
                 <nav class = "transparent  z-depth-0">
                     <div class ="nav-wrapper container">
-                        <a href = "#" class = "brand-logo">Logo</a>
+                        <a href = "#" class = "brand-logo">
+                            <img src="/images/logo.png" alt="" width="auto" height="100px">
+                        </a>
                         <ul id = "nav-mobile" class = "right  hide-on-med-and-down">
-                            <li><a href = "#">Link 1</a></li>
-                            <li><a href = "#">Link 2</a></li>
                             <li><a class = "waves-effect waves-light modal-trigger" href = "#login-modal">Login</a></li>
                         </ul>
                     </div>
@@ -61,7 +61,9 @@
                     </div>
                     <br>
                     <div class = "row center">
-                        <a class ="waves-effect waves-lighten btn-large">Contact Us</a>
+                        <a class ="waves-effect waves-lighten btn-large">
+                            <i class="material-icons left">call</i>(09998273392)<small></small>
+                        </a>
                     </div>
                 </div>
                 <div class = "parallax">
@@ -76,23 +78,71 @@
                         <i class="material-icons large">healing</i>
                         <h4 class="center">Professional Veterinarians</h4>
                         <p>
-                            Some Promotional Text Here.
+                            Only the most professional veterinarians will take care of your beloved pets.
                         </p>
                     </div>
                     <div class="col s4 center">
                         <i class="material-icons large">pets</i>
                         <h4 class="center">Animal Lovers</h4>
                         <p>
-                            Some Promotional Text Here.
+                            Your pet's well being is our highest priority.
                         </p>
                     </div>
                     <div class="col s4 center">
                         <i class="material-icons large">loyalty</i>
                         <h4 class="center">Customer Friendly</h4>
                         <p>
-                            Some Promotional Text Here.
+                            We don't just take care of our patients but also their owners.
                         </p>
                     </div>                    
+                </div>
+            </div>
+            <div class="container" style="margin-bottom: 100px">
+                <div class="row center">
+                    <h4>Top Services</h4>
+                </div>
+                <div class="row">
+                    <div class="col m4">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Grooming</span>
+                                <p>Good grooming is about more than just having a pretty pet. You're also tackling potential health conditions, says Bernadine Cruz, DVM, a veterinarian at Laguna Hills Animal Hospital in Laguna Hills, Calif. Here's how to care for your pet before any problems crop up.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m4">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Surgery</span>
+                                <p>
+                                    No pet owner likes the idea of a beloved animal having to undergo surgery, but it helps to know that your pet is in skilled, caring, compassionate hands. 
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m4">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Vaccination</span>
+                                <p>
+                                    Vaccines help prevent many illnesses that affect pets. Vaccinating your pet has long been considered one of the easiest ways to help him live a long, healthy life. Not only are there different vaccines for different diseases, there are different types and combinations of vaccines. Vaccination is a procedure that has risks and benefits that must be weighed for every pet relative to his lifestyle and health. 
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="parallax-container">
@@ -100,6 +150,7 @@
                     <img src="/images/dogs.jpg" alt="">
                 </div>
             </div>
+            
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -118,24 +169,14 @@
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
+                <h5 class="white-text"></h5>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            © 2017 Copyright <b>Animal Haven Veterinary Clinic</b>
+            <a class="grey-text text-lighten-4 right" href="#!"><i class="material-icons left">call</i>(09998273392)<small></small></a>
             </div>
           </div>
         </footer>

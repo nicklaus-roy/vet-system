@@ -13,7 +13,7 @@
 
         $_SESSION['auth_user'] = $user;
         if($user['role'] == 'admin'){
-            header("Location:/admin/home.php");
+            header("Location:/admin/messages/index.php");
         }
         else{
             header("Location:/client/reservations/index.php");

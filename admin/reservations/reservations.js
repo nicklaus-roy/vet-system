@@ -71,6 +71,7 @@ var app_reservations = new Vue({
     },
     mounted(){
         var vm = this;
+        var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
         $('.datepicker').pickadate({
            selectMonths: true, // Creates a dropdown to control month
            selectYears: 15, // Creates a dropdown of 15 years to control year,
@@ -81,7 +82,8 @@ var app_reservations = new Vue({
            format: 'dddd, mmm d, yyyy', // Close upon selecting a date,
            format_submit: 'yyyy-mm-dd',
            disable: [
-                1,7
+                1,7,
+                { from: [0,0,0], to: yesterday }
             ],
             onStart: function(){
                 var date = new Date();

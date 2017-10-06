@@ -9,9 +9,34 @@ var app_reservations = new Vue({
         time_from: "",
         auth_user: '',
         auth_user_name: '',
-        pet_id: ''
+        pet_id: '',
+        disabledDates: [],
+        time_picker_object: null
     },
     methods:{
+        changeTimes(){
+            var vm = this;
+            vm.disabledDates = [];
+            this.reservations.forEach(element => {
+                var addHours = 0;
+                var addHours2 = 0;
+                if(element.time_from.split(":")[2].split(" ")[1] == "PM"){
+                    addHours = 12;
+                }
+                if(element.time_to.split(":")[2].split(" ")[1] == "PM"){
+                    addHours2 = 12;
+                }
+                var disabledDate = {
+                    from: [parseInt(element.time_from.split(":")[0])+addHours, parseInt(element.time_from.split(":")[1])],
+                    to: [parseInt(element.time_to.split(":")[0])+addHours2, parseInt(element.time_to.split(":")[1])],
+                }
+                vm.disabledDates.push(disabledDate);
+            });
+            console.log(vm.disabledDates);
+            vm.time_picker_object.set('enable', true);
+
+            vm.time_picker_object.set('disable', vm.disabledDates);
+        },
         getReservations(){
             this.reservation_date = $('#date_from').val();
             var vm = this;
@@ -24,6 +49,7 @@ var app_reservations = new Vue({
                 dataType: 'json',
                 success:function(result){
                     vm.reservations = result;
+                    vm.changeTimes();
                 }
             });
         },
@@ -32,11 +58,13 @@ var app_reservations = new Vue({
             vm.time_from = $('#time_from').val();
             vm.client_id = $('#client_id').val();
             vm.service_id = $('#service_id').val();
-            $.post("/admin/reservations/store.php", {
+            vm.pet_id = $('#pet_id').val();
+            $.post("/client/reservations/store.php", {
                 reservation_date: this.reservation_date,
                 time_from: this.time_from,
                 client_id: this.client_id,
                 service_id: this.service_id,
+                pet_id: this.pet_id              
             }).done(function(data){
                 Materialize.toast("Reservation added.", 2000);
                 vm.getReservations();
@@ -51,21 +79,13 @@ var app_reservations = new Vue({
                 Materialize.toast("Reservation removed.", 2000);
                 vm.getReservations();
             });
-        },
-        checkTime(){
-            console.log("w");
-            this.time_from = $('#time_from').val();
-
-        }
+        }   
     },
     mounted(){
         var vm = this;
         this.auth_user = $('#auth_user').val();
         this.auth_user_name = $('#auth_user_name').val();
         var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
-        $('#time_from').on('change', {vm:vm}, function(){
-            console.log(vm);
-        });
         $('.datepicker').pickadate({
            selectMonths: true, // Creates a dropdown to control month
            selectYears: 15, // Creates a dropdown of 15 years to control year,
@@ -87,8 +107,11 @@ var app_reservations = new Vue({
         $('.modal').modal();
         this.reservation_date = $('#date_from').val();
         this.getReservations();
-        $('.timepicker').pickatime({
-            default: "8:00AM",
+        var time_field = $('.timepicker').pickatime({
+            interval: 15,
+            min:[8,0],
+            max:[17,0]
         });
+        vm.time_picker_object = time_field.pickatime('picker');
     }
 });
