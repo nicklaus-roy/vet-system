@@ -7,18 +7,21 @@
     $total_sales = $_POST['total_sales'];
     $transaction_date = date('Y-m-d');
 
+    $amount_given = $_POST['amount_given'];
+    $change = $_POST['change'];
+    $check_number = $_POST['check_number'];
+    $bank = $_POST['bank'];
+
     if($payment_method == 'cash'){
-        $amount_given = $_POST['amount_given'];
-        $change = $_POST['change'];
+        
 
         $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales, amount_given, customer_change)
             VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change')");
     }
     else{
-        $check_number = $_POST['check_number'];
-        $bank = $_POST['bank'];
-        $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales, bank, check_number)
-            VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$bank', '$check_number')");
+        $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales,
+        amount_given, customer_change, bank, check_number)
+            VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$bank', '$check_number')");
     }
 
     $receipt_number = $conn->insert_id;

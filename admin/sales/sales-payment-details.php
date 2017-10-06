@@ -13,14 +13,16 @@
         <input type="number" name = "total_sales" id = "total_sales" :value = "totalSales" readonly>
         <label for="total_sales">Total Sales:</label>
     </div>  
-    <div class="input-field col s3" v-show = "payment_method == 'cash'">
+    <div class="input-field col s3" >
         <input type="number" name = "amount_given" id = "amount_given" v-model = "amount_given">
         <label for="amount_given">Amount Given:</label>
     </div>
-    <div class="input-field col s3" v-show = "payment_method == 'cash'">
+    <div class="input-field col s3">
         <input type="text" name = "change" id = "change" readonly :value = "getChange">
         <label for="change">Change:</label>
     </div>
+</div>
+<div class="row">
     <div class="input-field col s3" v-show = "payment_method == 'check'">
         <input type="number" name = "check_number" id = "check_number" v-model = "check_number">
         <label for="check_number">Check No.:</label>

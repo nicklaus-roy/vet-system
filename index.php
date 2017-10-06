@@ -34,8 +34,8 @@
                         <div class="modal-content">
                             <h4>Login</h4>
                             <div class="input-field">
-                                <input type="email" name = "email" id = "email">
-                                <label for="email">Email: </label>
+                                <input type="text" name = "username" id = "username">
+                                <label for="text">Username: </label>
                             </div>
                             <div class="input-field">
                                 <input type="password" name = "password" id = "password">
