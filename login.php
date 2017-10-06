@@ -12,7 +12,7 @@
         }
 
         $_SESSION['auth_user'] = $user;
-        if($user['role'] == 'admin'){
+        if($user['role'] == 'admin' || $user['role'] == 'staff'){
             header("Location:/admin/messages/index.php");
         }
         else{
