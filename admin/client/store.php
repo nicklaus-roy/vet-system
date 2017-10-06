@@ -21,7 +21,7 @@
     $conn->query("INSERT INTO pets (id, name, species, client_id) VALUES ('$last_id','$pet_name', '$pet_species', '$client_id')");
 
     if(isset($_POST['create_user_account'])){
-        $username = $first_name.", ".$last_name;
+        $username = $first_name." ".$last_name;
         $conn->query("INSERT INTO users (username, password, role, first_name, last_name, middle_name) 
             VALUES ('$username','password', 'client', '$first_name', '$last_name', '$middle_name')");
         $user_id = $conn->insert_id;

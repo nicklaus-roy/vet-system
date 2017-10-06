@@ -48,6 +48,10 @@
 
             $conn->query("INSERT INTO sales (amount, quantity, product_id, receipt_number, original_amount) 
                 VALUES ('$amount', '$quantity', '$product_id', '$receipt_number' , '$original_amount')");
+
+            $cur_qty = $conn->query("SELECT quantity FROM products WHERE id = '$product_id'")->fetch_assoc();
+            $new_qty = $cur_qty['quantity'] - $quantity;
+            $conn->query("UPDATE products SET quantity = '$new_qty' WHERE id = '$product_id'");
         }
     }
 
