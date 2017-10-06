@@ -8,7 +8,10 @@ var app_reservations = new Vue({
         service_id: "",
         reservation_id: "",
         time_from: "",
-        time_to: ""
+        time_to: "",
+        pets:null,
+        clients:null,
+        client_id:""
     },
     methods:{
         getReservations(){
@@ -52,6 +55,18 @@ var app_reservations = new Vue({
                 Materialize.toast("Reservation removed.", 2000);
                 vm.getReservations();
             });
+        },
+        getPets(){
+            var vm = this;
+            $.ajax({
+                url:"./get-pets.php?client_id="+vm.client_id,
+                type:'GET',
+                dataType: 'json',
+                success:function(result){
+                    vm.pets = result;
+                    $('select').material_select();
+                }
+            });
         }
     },
     mounted(){
@@ -76,6 +91,17 @@ var app_reservations = new Vue({
         $('.modal').modal();
         this.reservation_date = $('#date_from').val();
         this.getReservations();
-        $('.timepicker').pickatime();
+        $('.timepicker').pickatime({
+            default:'8:00AM',
+        });
+        $.ajax({
+            url:'./get-clients.php',
+            type:'GET',
+            dataType: 'json',
+            success:function(result){
+                vm.clients = result;
+                $('select').material_select();
+            }
+        });
     }
 });

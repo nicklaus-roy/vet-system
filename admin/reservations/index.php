@@ -29,7 +29,7 @@
                 <br>
                 <a href = "#add-reservation-modal"
                     class = "btn waves-effect waves-light modal-trigger" title = "add">
-                    Add Reservation
+                    Set Reservation
                 </a>                            
             </div>
         </div>
@@ -76,21 +76,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s4">
-                                <select name = "client_id" id = "client_id">
-                                    <?php while($client = $clients->fetch_assoc()){ ?>
-                                        <option value="<?=$client['id']?>"><?=$client['last_name'].', '.$client['first_name']?></option>
-                                    <?php } ?>
-                                </select>
+                            <div class="col s4">
                                 <label for="client">Client:</label>
+                                <select name = "client_id" id = "client_id" class="browser-default" v-model = "client_id" @change = "getPets()">
+                                    <option v-for = "client in clients" :value="client.id">{{ client.first_name }} {{ client.last_name }}</option>
+                                </select>
                             </div>
-                            <div class="input-field col s4">
-                                <select name = "service_id" id = "service_id">
+                            <div class="col s4">
+                                <label for="service">Service:</label>
+                                <select name = "service_id" id = "service_id" class="browser-default">
                                     <?php while($service = $services->fetch_assoc()){ ?>
                                         <option value="<?=$service['id']?>"><?=$service['name']?></option>
                                     <?php } ?>
                                 </select>
-                                <label for="service">Service:</label>
+                            </div>
+                            <div class="col s4">
+                                <label for="pet_id">Pet:</label>
+                                <select name = "pet_id" id = "pet_id" class="browser-default">
+                                    <option v-for = "pet in pets" :value="pet.id">{{ pet.name }}</option>
+                                </select>
                             </div>
                             <div class="input-field col s4">
                                 <button class = "modal-action modal-close waves-effect waves-green btn" @click.prevent = "addReservation()">

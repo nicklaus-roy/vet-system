@@ -1,4 +1,3 @@
-
 var app_reservations = new Vue({
     el: '#app-reservations',
     data:{
@@ -8,9 +7,9 @@ var app_reservations = new Vue({
         service_id: "",
         reservation_id: "",
         time_from: "",
-        time_to: "",
         auth_user: '',
-        auth_user_name: ''
+        auth_user_name: '',
+        pet_id: ''
     },
     methods:{
         getReservations(){
@@ -31,13 +30,11 @@ var app_reservations = new Vue({
         addReservation(){
             var vm = this;
             vm.time_from = $('#time_from').val();
-            vm.time_to = $('#time_to').val();
             vm.client_id = $('#client_id').val();
             vm.service_id = $('#service_id').val();
             $.post("/admin/reservations/store.php", {
                 reservation_date: this.reservation_date,
                 time_from: this.time_from,
-                time_to: this.time_to,
                 client_id: this.client_id,
                 service_id: this.service_id,
             }).done(function(data){
@@ -54,12 +51,21 @@ var app_reservations = new Vue({
                 Materialize.toast("Reservation removed.", 2000);
                 vm.getReservations();
             });
+        },
+        checkTime(){
+            console.log("w");
+            this.time_from = $('#time_from').val();
+
         }
     },
     mounted(){
         var vm = this;
         this.auth_user = $('#auth_user').val();
         this.auth_user_name = $('#auth_user_name').val();
+        var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
+        $('#time_from').on('change', {vm:vm}, function(){
+            console.log(vm);
+        });
         $('.datepicker').pickadate({
            selectMonths: true, // Creates a dropdown to control month
            selectYears: 15, // Creates a dropdown of 15 years to control year,
@@ -70,7 +76,8 @@ var app_reservations = new Vue({
            format: 'dddd, mmm d, yyyy', // Close upon selecting a date,
            format_submit: 'yyyy-mm-dd',
            disable: [
-                1,7
+                1,7,
+                { from: [0,0,0], to: yesterday }
             ],
             onStart: function(){
                 var date = new Date();
@@ -80,6 +87,8 @@ var app_reservations = new Vue({
         $('.modal').modal();
         this.reservation_date = $('#date_from').val();
         this.getReservations();
-        $('.timepicker').pickatime();
+        $('.timepicker').pickatime({
+            default: "8:00AM",
+        });
     }
 });

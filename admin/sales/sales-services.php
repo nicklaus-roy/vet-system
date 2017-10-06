@@ -8,6 +8,7 @@
     </div> 
     <div class="input-field col s3">
         <select name="pet_id" id="pet_id">
+            <option ></option>
             <option v-for = "pet in pets" :value = "pet.id">{{ pet.name }}</option>
         </select>
         <label for="pet">Pet: </label>
