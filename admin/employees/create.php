@@ -30,6 +30,10 @@
                             <option value="admin">Admin</option>
                         </select>
                         <label for="">Role:</label>
+                    </div>
+                    <div class="col s3">
+                        <input type="checkbox" name = "is_active" id = "is_active">
+                        <label for="is_active">Active</label>
                     </div>    
                 </div>
                 <div class="row">

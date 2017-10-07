@@ -2,7 +2,7 @@
     session_start();
     include './shared/db_connect.php';
     $username = $_POST['username'];
-    $user_query = $conn->query("SELECT * FROM users WHERE username = '$username'");
+    $user_query = $conn->query("SELECT * FROM users WHERE username = '$username' AND is_active = '1'");
     if(mysqli_num_rows($user_query) > 0){
         $user = $user_query->fetch_assoc();
         if($user['password'] != $_POST['password']){

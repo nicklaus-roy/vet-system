@@ -12,7 +12,7 @@
     <div class="col s12">
         <div class="section">
             <h5>
-                employees
+                Employees
             </h5>
             <form action="/admin/employees/update.php" method="POST">
                 <div class="row">
@@ -40,7 +40,15 @@
                             <?php endif;?>
                         </select>
                         <label for="">Role:</label>
-                    </div>   
+                    </div>
+                    <div class="col s3">
+                        <?php if($employee['is_active']==1):?>
+                            <input type="checkbox" name = "is_active" id = "is_active" checked>
+                        <?php else: ?>
+                            <input type="checkbox" name = "is_active" id = "is_active">
+                        <?php endif;?>
+                        <label for="is_active">Active</label>
+                    </div>     
                 </div>
                 <div class="row">
                     <button class="btn">Save Changes</button>

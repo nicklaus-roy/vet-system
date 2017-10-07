@@ -9,8 +9,15 @@
     $middle_name = $_POST['middle_name'];
     $role = $_POST['role'];
 
+    if(isset($_POST['is_active'])){
+        $is_active = 1;
+    }
+    else{
+        $is_active = 0;
+    }
+
     $conn->query("UPDATE users SET last_name = '$last_name', first_name = '$first_name', 
-        middle_name = '$middle_name', role = '$role' WHERE id = '$employee_id'");
+        middle_name = '$middle_name', role = '$role', is_active = '$is_active' WHERE id = '$employee_id'");
 
     $_SESSION['message'] = 'Employee Updated';
     header("Location:/admin/employees/index.php");

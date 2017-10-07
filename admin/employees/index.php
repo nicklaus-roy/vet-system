@@ -22,6 +22,7 @@
                         <th>First Name</th>
                         <th>Middle Name</th>
                         <th>Role</th>
+                        <th>Active</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -32,6 +33,11 @@
                             <td><?=$employee['first_name']?></td>
                             <td><?=$employee['middle_name']?></td>
                             <td><?=$employee['role']?></td>
+                            <?php if($employee['is_active'] == 1):?>
+                                <td>YES</td>
+                            <?php else:?>
+                                <td>NO</td>
+                            <?php endif;?>
                             <td>
                                 <a href="./edit.php?id=<?=$employee['id']?>" title = "Edit">
                                     <i class="material-icons">edit</i>
