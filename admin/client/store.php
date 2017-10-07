@@ -22,8 +22,8 @@
 
     if(isset($_POST['create_user_account'])){
         $username = $first_name." ".$last_name;
-        $conn->query("INSERT INTO users (username, password, role, first_name, last_name, middle_name) 
-            VALUES ('$username','password', 'client', '$first_name', '$last_name', '$middle_name')");
+        $conn->query("INSERT INTO users (username, password, role, first_name, last_name, middle_name, is_active) 
+            VALUES ('$username','password', 'client', '$first_name', '$last_name', '$middle_name', '1')");
         $user_id = $conn->insert_id;
         $conn->query("UPDATE clients SET user_id = '$user_id' WHERE id = '$client_id'");
 
