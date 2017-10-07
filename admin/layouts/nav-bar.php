@@ -51,6 +51,8 @@
                         <li><a href="/admin/client/index.php">View Clients</a></li>
                         <?php if($user['role'] == 'admin'): ?>
                             <li><a href="/admin/employees/index.php">View Employees</a></li>
+                            <li><a href="/admin/clinic-details/index.php">Clinic Details</a></li>
+
                         <?php endif;?>
                         <li><a href="/logout.php">Logout</a></li>
                       </ul>
