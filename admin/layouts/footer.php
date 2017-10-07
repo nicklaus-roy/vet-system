@@ -7,7 +7,9 @@
     <div class="footer-copyright">
         <div class="container">
         © 2017 Copyright <b>Animal Haven Veterinary Clinic</b>
-        <a class="grey-text text-lighten-4 right" href="#!"><i class="material-icons left">call</i>(09998273392)<small></small></a>
+        <?php $store_details = $conn->query("SELECT * FROM store_details")->fetch_assoc()?>
+        <a class="grey-text text-lighten-4 right" href="#!"><i class="material-icons left">call</i>
+            <?=$store_details['contact_number']?><small></small></a>
         </div>
     </div>
 </footer>

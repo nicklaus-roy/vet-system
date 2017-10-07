@@ -1,5 +1,7 @@
  <?php
     session_start();
+    $root = $_SERVER['DOCUMENT_ROOT'];
+    include("./shared/db_connect.php");
  ?>   
     <html>
     <head>
@@ -62,7 +64,7 @@
                     <br>
                     <div class = "row center">
                         <a class ="waves-effect waves-lighten btn-large">
-                            <i class="material-icons left">call</i>(09998273392)<small></small>
+                            <i class="material-icons left">call</i>09998273392<small></small>
                         </a>
                     </div>
                 </div>
@@ -176,7 +178,9 @@
           <div class="footer-copyright">
             <div class="container">
             © 2017 Copyright <b>Animal Haven Veterinary Clinic</b>
-            <a class="grey-text text-lighten-4 right" href="#!"><i class="material-icons left">call</i>(09998273392)<small></small></a>
+            <?php $store_details = $conn->query("SELECT * FROM store_details")->fetch_assoc()?>
+            <a class="grey-text text-lighten-4 right" href="#!"><i class="material-icons left">call</i>
+                <?=$store_details['contact_number']?><small></small></a>
             </div>
           </div>
         </footer>

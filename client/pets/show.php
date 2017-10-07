@@ -2,7 +2,12 @@
     include('../layouts/master.php');
     $auth_user = $_SESSION['auth_user']['id'];
     $user = $conn->query("SELECT * FROM clients WHERE user_id = '$auth_user'")->fetch_assoc();
-    $pets = $conn->query("SELECT * FROM pets WHERE client_id = '".$user['id']."'");
+    $pet_id = $_GET['pet_id'];
+    $pet_histories = $conn->query("SELECT p.*, sr.service_id, s.name service_name, ofr.transaction_date FROM pets p 
+                INNER JOIN services_rendered sr ON sr.pet_id = p.id
+                INNER JOIN services s ON s.id = sr.service_id 
+                INNER JOIN official_receipts ofr ON ofr.receipt_number = sr.receipt_number
+                WHERE p.id = '$pet_id'");
 ?>
 <div class="row" id = "app-pets">
     <div class="col s12">
@@ -46,20 +51,16 @@
                     <thead>
                         <tr>
                             <th>Pet Name</th>
-                            <th>Species</th>
-                            <th>History</th>
+                            <th>Service</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while($pet = $pets->fetch_assoc()) {?>
+                        <?php while($pet_history = $pet_histories->fetch_assoc()) {?>
                         <tr>
-                            <td><?=$pet['name']?></td>
-                            <td><?=$pet['species']?></td>
-                            <td>
-                                <a href="./show.php?pet_id=<?=$pet['id']?>">
-                                    <i class="material-icons">timeline</i>    
-                                </a>
-                            </td>
+                            <td><?=$pet_history['name']?></td>
+                            <td><?=$pet_history['service_name']?></td>
+                            <td><?=date_format(date_create($pet_history['transaction_date']),'M d, Y')?></td>
                         </tr>
                         <?php } ?>
                     </tbody>
