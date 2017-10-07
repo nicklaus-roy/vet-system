@@ -28,9 +28,13 @@
 </div>
 <div class="row">
     <div class="input-field col s3">
-        <input type="text" name = "remarks" id = "remarks" v-model = "remarks">
-        <label for="remarks">Remarks:</label>
+        <input type="text" name = "tin_sr" id = "tin_sr" v-model = "tin_sr">
+        <label for="tin_sr">TIN/Sr. Citizen TIN:</label>
     </div>
+    <div class="input-field col s3">
+        <input type="text" name = "pwd_id_num" id = "pwd_id_num" v-model = "pwd_id_num">
+        <label for="pwd_id_num">OSCO/ PWD ID No.</label>
+    </div>  
     <div class="input-field col s3">
         <input type="text" name = "change" id = "change" readonly :value = "getChange">
         <label for="change">Change:</label>

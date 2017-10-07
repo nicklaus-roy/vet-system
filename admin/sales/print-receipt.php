@@ -133,6 +133,14 @@
                             <td>Bank:</td>
                             <td><?=$receipt_details['bank']?></td>
                         </tr>
+                         <tr>
+                            <td>TIN/ Sr. Citizen TIN:</td>
+                            <td><?=$receipt_details['tin_sr_tin']?></td>
+                        </tr>
+                        <tr>
+                            <td>OSCA/PWD ID No.</td>
+                            <td><?=$receipt_details['osca_pwd_id_num']?></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

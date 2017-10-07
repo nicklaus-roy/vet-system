@@ -11,6 +11,10 @@
     if(!$products){
         die(mysqli_error($conn));
     }
+
+
+    $total_number_of_product = $conn->query("SELECT sum(quantity) as total_qty FROM products")->fetch_assoc();
+    $total_value = $conn->query("SELECT sum(quantity*price) as total_value FROM products")->fetch_assoc();
 ?>
 <style>
     .critical-level{
@@ -25,7 +29,13 @@
                 <a href = "/admin/inventory/create.php" class="btn-floating waves-effect waves-light">
                     <i class="material-icons">add</i>
                 </a>
-            </h5>
+                <p style="font-size:14px">Total Number of Products in Inventory: 
+                    <b><?=$total_number_of_product['total_qty']?></b>
+
+                </p>
+                <p style="font-size:14px">Total Value of Inventory: <strong><?=$total_value['total_value']?></strong></p>
+
+            </h5>       
             <table id = "inventory-table" class="highlight custom-table">
                 <thead>
                     <tr>
@@ -33,7 +43,9 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Stock</th>
+                        <th>Inventory Total Amount</th>
                         <th>Reorder Qty</th>
+                        <th>Reorder Point</th>
                         <th>Category</th>
                         <th>Supplier</th>
                         <th>Actions</th>
@@ -46,7 +58,12 @@
                             <td><?=$product['description']?></td>
                             <td><?=$product['price']?></td>
                             <td><?=$product['quantity']?></td>
+                            <td><?=$product['price']*$product['quantity']?>.00</td>
                             <td><?=$product['reorder_quantity']?></td>
+                            <td>
+                                <?=$product ['reorder_point']?>
+                                </td>
+                            
                             <td><?=$product['category']?></td>
                             <td><?=$product['supplier']?></td>
                             <td>
