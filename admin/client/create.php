@@ -10,7 +10,7 @@
             <h5>
                 Clients
             </h5>
-            <form action="/admin/client/store.php" method="POST">
+            <form action="/admin/client/store.php" method="POST" id = "app-pets">
                 <div class="row">
                     <div class="input-field col s3">
                         <input type="text" name = "last_name" required>
@@ -36,15 +36,27 @@
                     </div>
                     <div class="col s4">
                         <label for="">Pet Species*</label>
-                        <select style="font-size: 15px" class="browser-default" name = "pet_species" required>
+                        <select style="font-size: 15px" class="browser-default" name = "pet_species" required 
+                        v-model = "pet_species">
                             <option value="dog">Dog</option> 
                             <option value="cat">Cat</option>
                             <option value="bird">Bird</option>
                             <option value="reptile">Reptile</option>
                             <option value="rabbit">Rabbit</option>
-                            <option value="small mammal">Small Mammal</option>
+                            <option value="small mammal">Small Mammals</option>
                             <option value="others">Others</option>
                         </select>
+                    </div>
+                    <div class="col s4" v-if = "getBreed != 'none'">
+                        <label for="">Pet Breed*</label>
+                        <select style="font-size: 15px" class="browser-default" name = "pet_breed" required>
+                            <option v-for = "breed in getBreed" :value="breed">{{ breed }}</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="col s4 input-field" v-else>
+                        <input type="text" name = "pet_breed" id = "pet_breed">
+                        <label for="pet_breed">Pet Breed:</label>
                     </div>
                     <div class="col s4">
                         <br>
@@ -63,6 +75,27 @@
 <?php
     include('../layouts/scripts.php');
 ?>
+<script>
+    var app_pets = new Vue({
+        el: '#app-pets',
+        data:{
+            pet_species: "",
+            dog_breeds: ['Askal', 'Beagle', 'German Shepard', 'Rottwelier', 'Bulldog','Golden Retriever'],
+            cat_breeds: ['Siamese', 'Persian', 'Ragdoll', 'Siberian', 'Russian Blue', 'Himalayan']
+        },
+        computed:{
+            getBreed(){
+                if(this.pet_species == 'dog'){
+                    return this.dog_breeds;
+                }
+                else if (this.pet_species == 'cat'){
+                    return this.cat_breeds;
+                }
+                return "none";
+            }
+        }
+    });
+</script>
 <?php
     include($root.'/admin/layouts/footer.php');
 ?>

@@ -31,6 +31,18 @@
                                     <option value="others">Others</option>
                                 </select>
                             </div>
+                            <div class="col s4" v-if = "getBreed != 'none'">
+                                <label for="">Pet Breed*</label>
+                                <select style="font-size: 15px" class="browser-default" name = "pet_breed" required
+                                    v-model = "pet_breed">
+                                    <option v-for = "breed in getBreed" :value="breed">{{ breed }}</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                            <div class="col s4 input-field" v-else>
+                                <input type="text" name = "pet_breed" id = "pet_breed" v-model = "pet_breed">
+                                <label for="pet_breed">Pet Breed:</label>
+                            </div>
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -47,6 +59,7 @@
                         <tr>
                             <th>Pet Name</th>
                             <th>Species</th>
+                            <th>Breed</th>
                             <th>History</th>
                         </tr>
                     </thead>
@@ -55,6 +68,7 @@
                         <tr>
                             <td><?=$pet['name']?></td>
                             <td><?=$pet['species']?></td>
+                            <td><?=$pet['breed']?></td>
                             <td>
                                 <a href="./show.php?pet_id=<?=$pet['id']?>">
                                     <i class="material-icons">timeline</i>    

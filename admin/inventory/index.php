@@ -98,26 +98,22 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Stock</th>
-                        <th>Inventory Total Amount</th>
                         <th>Reorder Qty</th>
                         <th>Reorder Point</th>
-                        <th>Category</th>
+                        <th style="min-width: 100px">Category</th>
                         <th>Supplier</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while($product = $products->fetch_assoc()){ ?>
-                        <tr class = "<?php echo $product['quantity'] <= $product['reorder_quantity'] ? "critical-level":""?>">
+                        <tr class = "<?php echo $product['quantity'] <= $product['reorder_point'] ? "critical-level":""?>">
                             <td><?=$product['name']?></td>
                             <td><?=$product['description']?></td>
                             <td><?=$product['price']?></td>
                             <td><?=$product['quantity']?></td>
-                            <td><?=$product['price']*$product['quantity']?>.00</td>
                             <td><?=$product['reorder_quantity']?></td>
-                            <td>
-                                <?=$product ['reorder_point']?>
-                                </td>
+                            <td><?=$product ['reorder_point']?></td>
                             
                             <td><?=$product['category']?></td>
                             <td><?=$product['supplier']?></td>
@@ -143,7 +139,9 @@
 <script src="/datatables/datatables.min.js"></script>
 <script>
     $(function(){
-        $('#inventory-table').DataTable();
+        $('#inventory-table').DataTable({
+            "scrollX": true
+        });
         $('.modal').modal();
     });
 </script>

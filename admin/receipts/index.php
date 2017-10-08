@@ -20,9 +20,13 @@
                         <th>Total Sales</th>
                         <th>Discount</th>
                         <th>Amount Due</th>
+                        <th>Amount Given</th>
+                        <th>Change</th>
                         <th>Payment Method</th>
                         <th>Bank</th>
                         <th>Check Num</th>
+                        <th>SR TIN</th>
+                        <th>PWD ID Num</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +38,13 @@
                             <td><?=$receipt['total_sales']?></td>
                             <td><?=$receipt['discount']?></td>
                             <td><?=$receipt['amount_due']?></td>
+                            <td><?=$receipt['amount_given']?></td>
+                            <td><?=$receipt['customer_change']?></td>
                             <td><?=$receipt['payment_method']?></td>
                             <td><?=$receipt['bank']?></td>
                             <td><?=$receipt['check_number']?></td>
+                            <td><?=$receipt['tin_sr']?></td>
+                            <td><?=$receipt['pwd_id_num']?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -51,7 +59,9 @@
 <script src="/datatables/datatables.min.js"></script>
 <script>
     $(function(){
-        $('#receipts-table').DataTable();
+        $('#receipts-table').DataTable({
+            "scrollX": true
+        });
     });
 </script>
 

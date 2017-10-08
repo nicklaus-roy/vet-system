@@ -4,6 +4,8 @@
 
     date_default_timezone_set('Asia/Manila');
 
+    $receipt_number = $_POST['receipt_number'];
+
     $payment_method = $_POST['payment_method'];
     $client_id = $_POST['client_id'];
     $total_sales = $_POST['total_sales'];
@@ -25,19 +27,17 @@
     if($payment_method == 'cash'){
         
 
-        $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales, amount_given, 
+        $receipt = $conn->query("INSERT INTO official_receipts (receipt_number,transaction_date, customer, payment_method, total_sales, amount_given, 
             customer_change, amount_due, discount, tin_sr, pwd_id_num)
-            VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$amount_due', 
+            VALUES ('$receipt_number','$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$amount_due', 
             '$discount_amount', '$tin_sr', '$pwd_id_num')");
     }
     else{
-        $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales,
+        $receipt = $conn->query("INSERT INTO official_receipts (receipt_number, transaction_date, customer, payment_method, total_sales,
         amount_given, customer_change, bank, check_number, amount_due, discount, tin_sr, pwd_id_num)
-            VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$bank', 
+            VALUES ('$receipt_number', '$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$bank', 
             '$check_number', '$amount_due', '$discount_amount', '$tin_sr', '$pwd_id_num')");
     }
-
-    $receipt_number = $conn->insert_id;
 
 
     if(isset($_POST['orders'])){

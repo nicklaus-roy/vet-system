@@ -9,6 +9,7 @@
     $contact_number = $_POST['contact_number'];
     $pet_name = $_POST['pet_name'];
     $pet_species = $_POST['pet_species'];
+    $pet_breed = $_POST['pet_breed'];
 
     
 
@@ -20,7 +21,8 @@
     $last_id = explode('-',$last_id['id'])[0].'-'.(explode('-',$last_id['id'])[1]+1);
 
 
-    $conn->query("INSERT INTO pets (id, name, species, client_id) VALUES ('$last_id','$pet_name', '$pet_species', '$client_id')");
+    $conn->query("INSERT INTO pets (id, name, species, client_id, breed) 
+        VALUES ('$last_id','$pet_name', '$pet_species', '$client_id', '$pet_breed')");
 
     if(isset($_POST['create_user_account'])){
         $username = $first_name." ".$last_name;

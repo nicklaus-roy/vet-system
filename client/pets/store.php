@@ -9,10 +9,11 @@
 
 
     $pet_name = $_POST['pet_name'];
+    $pet_breed = $_POST['pet_breed'];
     $pet_species = $_POST['pet_species'];
     $client_id = $_POST['client_id'];
-    $conn->query("INSERT INTO pets (id, name, species, client_id) 
-    	VALUES ('$last_id','$pet_name', '$pet_species', '$client_id')");
+    $conn->query("INSERT INTO pets (id, name, species, client_id, breed) 
+    	VALUES ('$last_id','$pet_name', '$pet_species', '$client_id', '$pet_breed')");
 
     echo mysqli_error($conn);
 ?>

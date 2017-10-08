@@ -9,6 +9,10 @@
     </div>
 </div>
 <div class="row">
+    <div class="input-field col s3">
+         <input type="number" name = "receipt_number" id = "receipt_number" v-model = "receipt_number">
+         <label for="receipt_number">Receipt Number:</label>
+     </div>  
    <div class="input-field col s3">
         <input type="number" name = "total_sales" id = "total_sales" :value = "totalSales" readonly>
         <label for="total_sales">Total Sales:</label>
@@ -21,12 +25,12 @@
         <input type="number" name = "discount_percent" id = "discount_percent" v-model.number = "discount_percent">
         <label for="discount_percent">Discount Percent</label>
     </div>
+</div>
+<div class="row">
     <div class="input-field col s3" >
         <input type="number" name = "amount_due" id = "amount_due" readonly :value = "getAmountDue">
         <label for="amount_due">Amount Due:</label>
     </div>
-</div>
-<div class="row">
     <div class="input-field col s3">
         <input type="text" name = "tin_sr" id = "tin_sr" v-model = "tin_sr">
         <label for="tin_sr">TIN/Sr. Citizen TIN:</label>

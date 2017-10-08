@@ -20,7 +20,8 @@ var app_sales = new Vue({
         discount_percent: 0.00,
         discount: 0.00,
         tin_sr:"",
-        pwd_id_num: ""
+        pwd_id_num: "",
+        receipt_number: 0,
     },
     methods:{
         addToOrderList(){
@@ -92,7 +93,8 @@ var app_sales = new Vue({
                     discount: this.discount_percent,
                     amount_due: this.discount,
                     tin_sr: this.tin_sr,
-                    pwd_id_num: this.pwd_id_num
+                    pwd_id_num: this.pwd_id_num,
+                    receipt_number: this.receipt_number
                 },
                 success:function(result){
                     console.log("s");
