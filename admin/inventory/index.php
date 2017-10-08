@@ -11,6 +11,9 @@
     if(!$products){
         die(mysqli_error($conn));
     }
+    $product_list = $conn->query("SELECT * FROM products ORDER BY name");
+
+    $suppliers = $conn->query("SELECT * FROM suppliers ORDER BY name");
 
 
     $total_number_of_product = $conn->query("SELECT sum(quantity) as total_qty FROM products")->fetch_assoc();
@@ -29,13 +32,65 @@
                 <a href = "/admin/inventory/create.php" class="btn-floating waves-effect waves-light">
                     <i class="material-icons">add</i>
                 </a>
-                <p style="font-size:14px">Total Number of Products in Inventory: 
-                    <b><?=$total_number_of_product['total_qty']?></b>
 
-                </p>
-                <p style="font-size:14px">Total Value of Inventory: <strong><?=$total_value['total_value']?></strong></p>
-
-            </h5>       
+            </h5>
+            <div class="fixed-action-btn horizontal click-to-toggle" 
+                style="top:80px">
+                <a class="btn-floating btn-large red">
+                  <i class="large material-icons">mode_edit</i>
+                </a>
+                <ul>
+                  <li>
+                    <a href = "#add-delivery-modal" class="btn-floating blue modal-trigger" title = "Add Delivery">
+                        <i class="material-icons">local_shipping</i>
+                    </a>
+                    </li>
+                  <li><a href = "#order-form-modal"  class="btn-floating green modal-trigger" 
+                        title = "Order Form"><i class="material-icons">description</i>
+                        </a>
+                    </li>
+                </ul>
+              </div> 
+              <div id="add-delivery-modal" class="modal modal-fixed-footer">
+                    <form action="./update-qty.php" method = "POST">
+                        <div class="modal-content">
+                            <h4>Add Product Inventory</h4>
+                            <div class="input-field col s5">
+                                <select name = "product_id" id = "product_id">
+                                <?php while($list_item = $product_list->fetch_assoc()) { ?>
+                                    <option value="<?=$list_item['id']?>"><?=$list_item['name']?></option>
+                                <?php } ?>
+                                </select>
+                                <label for="product_id">Product</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <input type="text" name = "quantity" id = "quantity">
+                                <label for="quantity">Quantity</label>
+                            </div>
+                        </div>  
+                        <div class="modal-footer">
+                            <button class="modal-action modal-close waves-effect waves-green btn-flat">Add</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="order-form-modal" class="modal modal-fixed-footer">
+                    <form action="./order-form.php" method = "GET" target = "_blank">
+                          <div class="modal-content">
+                              <h4>Order form for Supplier</h4>
+                              <div class="col s6">
+                                  <label for="supplier_id">Supplier</label>
+                                  <select name = "supplier_id" id = "supplier_id" class="browser-default">
+                                  <?php while($supplier = $suppliers->fetch_assoc()) { ?>
+                                      <option value="<?=$supplier['id']?>"><?=$supplier['name']?></option>
+                                  <?php } ?>
+                                  </select>
+                              </div>
+                          </div>  
+                          <div class="modal-footer">
+                              <button class="modal-action modal-close waves-effect waves-green btn-flat">Go</button>
+                          </div>
+                    </form>
+                  </div>        
             <table id = "inventory-table" class="highlight custom-table">
                 <thead>
                     <tr>
@@ -89,6 +144,7 @@
 <script>
     $(function(){
         $('#inventory-table').DataTable();
+        $('.modal').modal();
     });
 </script>
 
