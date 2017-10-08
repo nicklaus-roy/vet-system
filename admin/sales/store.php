@@ -8,8 +8,10 @@
     $client_id = $_POST['client_id'];
     $total_sales = $_POST['total_sales'];
     $amount_due = $_POST['amount_due'];
-    $remarks = $_POST['remarks'];
     $transaction_date = date('Y-m-d');
+
+    $pwd_id_num = $_POST['pwd_id_num'];
+    $tin_sr = $_POST['tin_sr'];
 
     $amount_given = $_POST['amount_given'];
     $change = $_POST['change'];
@@ -24,15 +26,15 @@
         
 
         $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales, amount_given, 
-            customer_change, amount_due, remarks, discount)
+            customer_change, amount_due, discount, tin_sr, pwd_id_num)
             VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$amount_due', 
-            '$remarks', '$discount_amount')");
+            '$discount_amount', '$tin_sr', '$pwd_id_num')");
     }
     else{
         $receipt = $conn->query("INSERT INTO official_receipts (transaction_date, customer, payment_method, total_sales,
-        amount_given, customer_change, bank, check_number, amount_due, remarks, discount)
+        amount_given, customer_change, bank, check_number, amount_due, discount, tin_sr, pwd_id_num)
             VALUES ('$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$bank', 
-            '$check_number', '$amount_due', '$remarks', '$discount_amount')");
+            '$check_number', '$amount_due', '$discount_amount', '$tin_sr', '$pwd_id_num')");
     }
 
     $receipt_number = $conn->insert_id;
@@ -68,6 +70,7 @@
                 VALUES ('$price', '$actual_price', '$service_id', '$pet_id', '$receipt_number')");
         }
     }
+    // echo mysqli_error($conn);
     echo $receipt_number;
     exit;
 ?>

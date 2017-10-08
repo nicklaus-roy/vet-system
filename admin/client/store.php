@@ -10,6 +10,8 @@
     $pet_name = $_POST['pet_name'];
     $pet_species = $_POST['pet_species'];
 
+    
+
     $conn->query("INSERT INTO clients (contact_number, last_name, first_name, middle_name) 
         VALUES('$contact_number', '$last_name', '$first_name', '$middle_name')");
     $client_id = $conn->insert_id;

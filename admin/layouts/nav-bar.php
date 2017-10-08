@@ -25,6 +25,9 @@
                     <li class=""><a href="/admin/services/index.php" class="black-text">
                         <i class="material-icons" style="font-size: 30px">healing</i>
                     </a></li>
+                    <li class=""><a href="/admin/receipts/index.php" class="black-text">
+                        <i class="material-icons" style="font-size: 30px">receipt</i>
+                    </a></li>
 
                     <li class="">
                         <a class='dropdown-button black-text' 

@@ -19,7 +19,8 @@ var app_sales = new Vue({
         client_id: "",
         discount_percent: 0.00,
         discount: 0.00,
-        remarks: ''
+        tin_sr:"",
+        pwd_id_num: ""
     },
     methods:{
         addToOrderList(){
@@ -81,7 +82,6 @@ var app_sales = new Vue({
                 data: {
                     client_id: this.client_id,
                     total_sales: this.total_sales,
-                    remarks: this.remarks,
                     amount_given: this.amount_given,
                     change: this.change,
                     payment_method: this.payment_method,
@@ -90,11 +90,13 @@ var app_sales = new Vue({
                     orders: this.orders,
                     availed_services: this.availed_services,
                     discount: this.discount_percent,
-                    amount_due: this.discount
+                    amount_due: this.discount,
+                    tin_sr: this.tin_sr,
+                    pwd_id_num: this.pwd_id_num
                 },
                 success:function(result){
                     console.log("s");
-                    window.location.replace("/admin/sales/print-receipt.php?receipt_number="+result);
+                    window.location.replace("/admin/receipts/index.php");
                 }
             });
         }
