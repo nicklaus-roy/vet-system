@@ -64,11 +64,26 @@
                             <h5 style="font-size: 18px">Supplier: <?=$supplier_name?></h5>
                         </div>
                         <div style="visibility: hidden; display: none" id = "details">
-                            <br>
-                            <p>Requestor: ANIMAL HAVEN VETERINARY CLINIC</p>
-                            <p>ID 35 Km 6, Betag, La Trinidad, Benguet</p>
-                            <p>GINA V. MAGALGALIT - Prop.</p>
-                            <p>Contact No: 09998273392</p>   
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Requestor</td>
+                                        <td>ANIMAL HAVEN VETERINARY CLINIC</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Person</td>
+                                        <td>GINA V. MAGALGALIT - Prop.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>ID 35 Km 6, Betag, La Trinidad, Benguet</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Number:</td>
+                                        <td>09998273392</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <br>
                         </div>
                         <div style="visibility: hidden">

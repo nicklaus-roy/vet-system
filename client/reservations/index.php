@@ -126,7 +126,7 @@
                                 <select name = "pet" id = "pet_id" v-model = "pet_id">
                                     <option selected disabled>Choose a pet</option>
                                     <?php while($pet = $pets->fetch_assoc()){ ?>
-                                        <option value="<?=$pet['id']?>"><?=$pet['name']?></option>
+                                        <option value="<?=$pet['id']?>"><?=$pet['name']?>(<?=$pet['breed']?>)</option>
                                     <?php } ?>
                                 </select>
                                 <label for="pet">Pet:</label>

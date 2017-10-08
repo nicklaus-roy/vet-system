@@ -4,42 +4,61 @@ var app_sales_report = new Vue({
         products:[],
         product_sales:[],
         services:[],
-        services_availed:[]
+        services_availed:[],
+        month:"10"
     },
-    mounted(){
-        var vm = this;
-        $.ajax({
-            url: '/admin/reports/get-best-selling.php',
-            type: 'GET',
-            dataType: 'json',
-            success:function(result){
-                console.log(result);
-                result.forEach(element => {
-                    vm.products.push(element.name);
-                    vm.product_sales.push(element.total_sales);
-                });
-                vm.renderBestSellersGraph();
-            }
-        });
-        $.ajax({
-            url: '/admin/reports/get-most-availed.php',
-            type: 'GET',
-            dataType: 'json',
-            data:{
-                chart: 'best-sellers'
-            },
-            success:function(result){
-                console.log(result);
-                result.forEach(element => {
-                    vm.services.push(element.name);
-                    vm.services_availed.push(element.total_sales);
-                });
-                vm.renderMostAvailedGraph();
-            }
 
-        });
+    mounted(){
+        this.getBestSellers();
+        this.getMostAvailedProducts();
     },
     methods:{
+        reRender(){
+            this.products = [];
+            this.services = [];
+            this.product_sales = [];
+            this.services_availed = [];
+            this.getBestSellers();
+            this.getMostAvailedProducts();
+        },
+        getBestSellers(){
+            var vm = this;
+            $.ajax({
+                url: '/admin/reports/get-best-selling.php',
+                type: 'GET',
+                data:{
+                    month: vm.month
+                },
+                dataType: 'json',
+                success:function(result){
+                    result.forEach(element => {
+                        vm.products.push(element.name);
+                        vm.product_sales.push(element.total_sales);
+                    });
+                    vm.renderBestSellersGraph();
+                }
+            });
+        },
+        getMostAvailedProducts(){
+
+            var vm = this;
+            $.ajax({
+                url: '/admin/reports/get-most-availed.php',
+                type: 'GET',
+                dataType: 'json',
+                data:{
+                    month: vm.month
+                },
+                success:function(result){
+                    result.forEach(element => {
+                        vm.services.push(element.name);
+                        vm.services_availed.push(element.total_sales);
+                    });
+                    vm.renderMostAvailedGraph();
+                }
+
+            });
+        },
         renderBestSellersGraph(){
             var vm = this;
             var ctx = document.getElementById("bestSellerChart");
@@ -98,6 +117,7 @@ var app_sales_report = new Vue({
         renderMostAvailedGraph(){
             var vm = this;
             var ctx = document.getElementById("mostAvailedChart");
+
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
