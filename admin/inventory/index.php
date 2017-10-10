@@ -139,9 +139,7 @@
 <script src="/datatables/datatables.min.js"></script>
 <script>
     $(function(){
-        $('#inventory-table').DataTable({
-            "scrollX": true
-        });
+        $('#inventory-table').DataTable();
         $('.modal').modal();
     });
 </script>

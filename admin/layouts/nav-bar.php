@@ -38,6 +38,7 @@
                         <ul id='dropdown2' class='dropdown-content'>
                             <li><a href="/admin/reports/sales-report.php">Sales Report</a></li>
                             <li><a href="/admin/reports/best-sellers-report.php">Best Sellers and Most Availed Report</a></li>
+                            <li><a href="/admin/reports/inventory-report.php">Inventory Report</a></li>
                         </ul>
                     </li>
                     <li class=""><a href="/admin/sales/list-sales.php" class="black-text">

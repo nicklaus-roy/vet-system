@@ -60,7 +60,6 @@
 <script>
     $(function(){
         $('#receipts-table').DataTable({
-            "scrollX": true
         });
     });
 </script>

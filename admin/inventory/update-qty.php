@@ -25,6 +25,8 @@
     $conn->query("UPDATE products SET quantity = quantity+".$quantity.", reorder_point = '$reorder_point',
         reorder_quantity = '$reorder_quantity' WHERE id = '$product_id'");
 
+    $conn->query("INSERT INTO deliveries (product_id, quantity, date_received) VALUES ('$product_id', '$quantity', '$cur_date')");
+
     $_SESSION['message'] = "Product Quantity Updated.";
     header("Location:/admin/inventory/index.php");
 ?>
