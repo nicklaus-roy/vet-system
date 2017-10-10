@@ -3,7 +3,7 @@
     include($root.'/shared/db_connect.php');
     include($root.'/admin/layouts/master.php');
     $receipts = $conn->query("SELECT r.*, concat(c.first_name, ' ',c.last_name) as customer_name 
-        FROM official_receipts r INNER JOIN clients c ON r.customer = c.id");
+        FROM official_receipts r LEFT JOIN clients c ON r.customer = c.id");
 ?>
 <div class="row">
     <div class="col s12">

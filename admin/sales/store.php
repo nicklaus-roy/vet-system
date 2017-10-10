@@ -8,6 +8,7 @@
 
     $payment_method = $_POST['payment_method'];
     $client_id = $_POST['client_id'];
+
     $total_sales = $_POST['total_sales'];
     $amount_due = $_POST['amount_due'];
     $transaction_date = date('Y-m-d');
