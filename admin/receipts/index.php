@@ -25,8 +25,8 @@
                         <th>Payment Method</th>
                         <th>Bank</th>
                         <th>Check Num</th>
-                        <th>SR TIN</th>
-                        <th>PWD ID Num</th>
+                        <th>Discount Type</th>
+                        <th>Discount ID Num</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,8 +43,8 @@
                             <td><?=$receipt['payment_method']?></td>
                             <td><?=$receipt['bank']?></td>
                             <td><?=$receipt['check_number']?></td>
-                            <td><?=$receipt['tin_sr']?></td>
-                            <td><?=$receipt['pwd_id_num']?></td>
+                            <td><?=$receipt['discount_type']?></td>
+                            <td><?=$receipt['discount_id_num']?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -61,6 +61,7 @@
     $(function(){
         $('#receipts-table').DataTable({
         });
+        $('select').addClass('browser-default');
     });
 </script>
 

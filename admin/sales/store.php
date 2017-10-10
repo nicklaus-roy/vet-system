@@ -12,8 +12,8 @@
     $amount_due = $_POST['amount_due'];
     $transaction_date = date('Y-m-d');
 
-    $pwd_id_num = $_POST['pwd_id_num'];
-    $tin_sr = $_POST['tin_sr'];
+    $discount_type = $_POST['discount_type'];
+    $discount_id_num = $_POST['discount_id_num'];
 
     $amount_given = $_POST['amount_given'];
     $change = $_POST['change'];
@@ -28,15 +28,15 @@
         
 
         $receipt = $conn->query("INSERT INTO official_receipts (receipt_number,transaction_date, customer, payment_method, total_sales, amount_given, 
-            customer_change, amount_due, discount, tin_sr, pwd_id_num)
+            customer_change, amount_due, discount, discount_type, discount_id_num)
             VALUES ('$receipt_number','$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$amount_due', 
-            '$discount_amount', '$tin_sr', '$pwd_id_num')");
+            '$discount_amount', '$discount_type', '$discount_id_num')");
     }
     else{
         $receipt = $conn->query("INSERT INTO official_receipts (receipt_number, transaction_date, customer, payment_method, total_sales,
-        amount_given, customer_change, bank, check_number, amount_due, discount, tin_sr, pwd_id_num)
+        amount_given, customer_change, bank, check_number, amount_due, discount, discount_type, discount_id_num)
             VALUES ('$receipt_number', '$transaction_date', '$client_id', '$payment_method', '$total_sales', '$amount_given', '$change', '$bank', 
-            '$check_number', '$amount_due', '$discount_amount', '$tin_sr', '$pwd_id_num')");
+            '$check_number', '$amount_due', '$discount_amount', '$discount_type', '$discount_id_num')");
     }
 
 

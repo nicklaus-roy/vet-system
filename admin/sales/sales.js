@@ -19,11 +19,27 @@ var app_sales = new Vue({
         client_id: "",
         discount_percent: 0.00,
         discount: 0.00,
-        tin_sr:"",
-        pwd_id_num: "",
         receipt_number: 0,
+        discount_type: 'none',
+        discount_id_num: ''
     },
     methods:{
+        checkReceiptNumber(){
+            var vm = this;
+            $.ajax({
+                url: './get-receipt-number.php',
+                type: 'GET',
+                data:{
+                    receipt_number: vm.receipt_number
+                },
+                success:function(result){
+                    if(result){
+                        Materialize.toast(result, 2000);
+                        $('#receipt_number').focus();
+                    }
+                }
+            });
+        },
         addToOrderList(){
             var vm = this;
             vm.order_product = $("#product_id").val();
@@ -92,8 +108,8 @@ var app_sales = new Vue({
                     availed_services: this.availed_services,
                     discount: this.discount_percent,
                     amount_due: this.discount,
-                    tin_sr: this.tin_sr,
-                    pwd_id_num: this.pwd_id_num,
+                    discount_type: this.discount_type,
+                    discount_id_num: this.discount_id_num,
                     receipt_number: this.receipt_number
                 },
                 success:function(result){
